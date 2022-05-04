@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: 'id',
       });
 
-    }
+    } 
   }
   Users.init(
     { // 첫번째 객체 인수는 테이블 필드에 대한 설정
