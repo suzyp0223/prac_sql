@@ -12,7 +12,7 @@ const allPost = async (req, res) => {
         {
           type: QueryTypes.SELECT,
         }
-    );
+    ); 
     if (postLists.length === 0) {
       return res.status(200).json({
         ok: true,
