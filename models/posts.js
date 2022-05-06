@@ -5,14 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     //다른 모델과의 관계
     static associate(db) { // 인자로 index.js에서 만든 여러 테이블이 저장되어있는 db객체를 받을 것이다.
       Posts.belongsTo(db.Users, {
-        foreignKey: 'id',
-        sourceKey: 'id',
+        foreignKey: 'userId',
+        sourceKey: 'userId',
       });
       Posts.hasMany(db.Comments, {
-        foreignKey: 'id',
-        sourceKey: 'id',
+        foreignKey: 'postId',
+        sourceKey: 'postId',
       });
-
     }
   }
   Posts.init(
@@ -31,18 +30,27 @@ module.exports = (sequelize, DataTypes) => {
         type: Sequelize.STRING(30),
         allowNull: false,
       },
+      nickname: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+      },
       content: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       imgUrl:{
         type: Sequelize.STRING,
+        allowNull: true,
+      },
+      profile: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      date: {
-        type: Sequelize.DATE,
+      postNum: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
+      //좋아요, 찜 기능 추가하기
     },
     { //두번째 객체 인수는 테이블 자체에 대한 설정
       sequelize, /* static init 메서드의 매개변수와 연결되는 옵션으로, db.sequelize 객체를 넣어야 한다. */

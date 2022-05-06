@@ -5,15 +5,14 @@ module.exports = (sequelize, DataTypes) => {
     //다른 모델과의 관계
     static associate(db) { // 인자로 index.js에서 만든 여러 테이블이 저장되어있는 db객체를 받을 것이다.
       Users.hasMany(db.Posts, {
-        foreignKey: 'id',
-        sourceKey: 'id',
+        foreignKey: 'userId',
+        sourceKey: 'userId',
       });
       Users.hasMany(db.Comments, {
-        foreignKey: 'id',
-        sourceKey: 'id',
+        foreignKey: 'userId',
+        sourceKey: 'userId',
       });
-
-    } 
+    }
   }
   Users.init(
     { // 첫번째 객체 인수는 테이블 필드에 대한 설정
@@ -24,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         required: true,
       },
       email: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+        unique: true,
+      },
+      nickname: {
         type: Sequelize.STRING(20),
         allowNull: false,
       },

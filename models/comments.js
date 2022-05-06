@@ -1,9 +1,7 @@
-'use strict';
 const Sequelize = require("sequelize");
-const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Comments extends Model {
+  class Comments extends Sequelize.Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,13 +10,14 @@ module.exports = (sequelize, DataTypes) => {
 
     //다른 모델과의 관계
     static associate(db) { // 인자로 index.js에서 만든 여러 테이블이 저장되어있는 db객체를 받을 것이다.
-      Comments.hasMany(db.Users, {
-        foreignKey: 'id',
-        sourceKey: 'id',
+      Comments.belongsTo(db.Users, {
+        foreignKey: 'userId',
+        sourceKey: 'userId',
       });
-      Comments.hasMany(db.Posts, {
-        foreignKey: 'id',
-        sourceKey: 'id',
+      Comments.belongsTo(db.Posts, {
+        foreignKey: 'postId',
+        sourceKey: 'postId',
+        onDelete: 'CASCADE',
       });
 
     }
@@ -31,12 +30,24 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         required: true,
       },
-      content: {
-        type: Sequelize.STRING(100),
+      userId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
-      date: {
-        type: Sequelize.DATE,
+      postId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      nickname: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+      },
+      profile: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      content: {
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
     },

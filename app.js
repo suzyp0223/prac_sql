@@ -1,25 +1,12 @@
 const express = require('express');
 const app = express();
+const { swaggerUi, specs } = require('./modules/swagger');
 // const cors = require('cors');
 require('dotenv').config();
 //port 설정. 없으면 5000번 연결
 const port = process.env.PORT || 5000;
 // index.js에 있는 db.sequelize 객체 모듈을 구조분해로 불러온다.
 const { sequelize } = require('./models');
-
-//Request 로그 남기는 미들웨어
-const requestMiddleware = (req, res, next) => {
-  console.log(
-    'Request URL:',
-    req.originalUrl,
-    ' - ',
-    new Date(+new Date() + 3240 * 10000)
-      .toISOString()
-      .replace('T', ' ')
-      .replace(/\..*/, '')
-  );
-  next();
-};
 
 // force: 서버 실행 시 마다 테이블을 재생성 할 것인지 아닌지
 // force: true는 모델을 수정하면, 이를 db에 반영하기 위한 옵션이다.
@@ -39,6 +26,21 @@ sequelize
     console.error(err);
   });
 
+//Request 로그 남기는 미들웨어
+const requestMiddleware = (req, res, next) => {
+  console.log(
+    'Request URL:',
+    req.originalUrl,
+    ' - ',
+    new Date(+new Date() + 3240 * 10000)
+      .toISOString()
+      .replace('T', ' ')
+      .replace(/\..*/, '')
+  );
+  next();
+};
+
+
 // app.use(
 //   cors({
 //     origin: true,
@@ -46,20 +48,23 @@ sequelize
 //   })
 // );
 
+// swagger path 정의 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
 // json 파싱
 app.use(express.json());
 app.use(requestMiddleware);
 
 // //router 가져오기
-// const userRouter = require("./routes/user");
-// const postRouter = require("./routes/post");
-// const commentRouter = require("./routes/comment");
+// const usersRouter = require("./routes/users");
+const postsRouter = require("./routes/posts");
+// const commentsRouter = require("./routes/comments");
 
 // uri 파싱
 app.use('/', express.urlencoded({ extended: false }), [
-//   userRouter,
-//   postRouter,
-//   commentRouter,
+//   usersRouter,
+  postsRouter,
+//   commentsRouter,
 ]);
 
 //정적파일 사용

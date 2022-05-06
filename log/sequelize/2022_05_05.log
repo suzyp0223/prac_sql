@@ -1,0 +1,27 @@
+
+
+[10:18:48]
+Executing (default): CREATE TABLE IF NOT EXISTS `users` (`userId` INTEGER auto_increment , `email` VARCHAR(20) NOT NULL UNIQUE, `pass` VARCHAR(20) NOT NULL, `profile` VARCHAR(255) NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`userId`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+Executing (default): SHOW INDEX FROM `users` FROM `prac_sql`
+Executing (default): CREATE TABLE IF NOT EXISTS `posts` (`postId` INTEGER auto_increment , `userId` INTEGER NOT NULL, `title` VARCHAR(30) NOT NULL, `content` VARCHAR(255) NOT NULL, `imgUrl` VARCHAR(255), `profile` VARCHAR(255) NOT NULL, `postNum` INTEGER NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`postId`), FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE NO ACTION ON UPDATE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+Executing (default): SHOW INDEX FROM `posts` FROM `prac_sql`
+Executing (default): CREATE TABLE IF NOT EXISTS `comments` (`commentId` INTEGER auto_increment , `userId` INTEGER NOT NULL, `postId` INTEGER NOT NULL, `profile` VARCHAR(255) NOT NULL, `content` VARCHAR(100) NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`commentId`), FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE NO ACTION ON UPDATE CASCADE, FOREIGN KEY (`postId`) REFERENCES `posts` (`postId`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+Executing (default): SHOW INDEX FROM `comments` FROM `prac_sql`
+
+
+[18:48:51]
+Executing (default): CREATE TABLE IF NOT EXISTS `users` (`userId` INTEGER auto_increment , `email` VARCHAR(20) NOT NULL UNIQUE, `pass` VARCHAR(20) NOT NULL, `profile` VARCHAR(255) NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`userId`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+Executing (default): SHOW INDEX FROM `users` FROM `prac_sql`
+Executing (default): CREATE TABLE IF NOT EXISTS `posts` (`postId` INTEGER auto_increment , `userId` INTEGER NOT NULL, `title` VARCHAR(30) NOT NULL, `content` VARCHAR(255) NOT NULL, `imgUrl` VARCHAR(255), `profile` VARCHAR(255) NOT NULL, `postNum` INTEGER NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`postId`), FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE NO ACTION ON UPDATE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+Executing (default): SHOW INDEX FROM `posts` FROM `prac_sql`
+Executing (default): CREATE TABLE IF NOT EXISTS `comments` (`commentId` INTEGER auto_increment , `userId` INTEGER NOT NULL, `postId` INTEGER NOT NULL, `profile` VARCHAR(255) NOT NULL, `content` VARCHAR(100) NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`commentId`), FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE NO ACTION ON UPDATE CASCADE, FOREIGN KEY (`postId`) REFERENCES `posts` (`postId`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+Executing (default): SHOW INDEX FROM `comments` FROM `prac_sql`
+
+
+[18:48:53]
+Executing (default): CREATE TABLE IF NOT EXISTS `users` (`userId` INTEGER auto_increment , `email` VARCHAR(20) NOT NULL UNIQUE, `pass` VARCHAR(20) NOT NULL, `profile` VARCHAR(255) NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`userId`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+Executing (default): SHOW INDEX FROM `users` FROM `prac_sql`
+Executing (default): CREATE TABLE IF NOT EXISTS `posts` (`postId` INTEGER auto_increment , `userId` INTEGER NOT NULL, `title` VARCHAR(30) NOT NULL, `content` VARCHAR(255) NOT NULL, `imgUrl` VARCHAR(255), `profile` VARCHAR(255) NOT NULL, `postNum` INTEGER NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`postId`), FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE NO ACTION ON UPDATE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+Executing (default): SHOW INDEX FROM `posts` FROM `prac_sql`
+Executing (default): CREATE TABLE IF NOT EXISTS `comments` (`commentId` INTEGER auto_increment , `userId` INTEGER NOT NULL, `postId` INTEGER NOT NULL, `profile` VARCHAR(255) NOT NULL, `content` VARCHAR(100) NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`commentId`), FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE NO ACTION ON UPDATE CASCADE, FOREIGN KEY (`postId`) REFERENCES `posts` (`postId`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+Executing (default): SHOW INDEX FROM `comments` FROM `prac_sql`
